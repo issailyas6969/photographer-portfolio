@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jane Doe – Photographer Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --color-bg: #ffffff;
+  --color-fg: #222222;
+  --color-primary: #0066ff;
+  --color-muted: #666666;
+  --color-accent: #ff6600;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #111111;
+    --color-fg: #eeeeee;
+    --color-muted: #bbbbbb;
+    --color-primary: #3399ff;
+    --color-accent: #ff9966;
+  }
+}
+[data-theme="light"] {
+  --color-bg: #ffffff;
+  --color-fg: #222222;
+  --color-muted: #666666;
+  --color-primary: #0066ff;
+  --color-accent: #ff6600;
+}
+[data-theme="dark"] {
+  --color-bg: #111111;
+  --color-fg: #eeeeee;
+  --color-muted: #bbbbbb;
+  --color-primary: #3399ff;
+  --color-accent: #ff9966;
+}
+html, body {
+  margin:0;
+  padding:0;
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-fg);
+  line-height: 1.6;
+}
+a { color: var(--color-primary); text-decoration: none; }
+a:hover, a:focus { text-decoration: underline; }
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 2rem;
+  background: var(--color-bg);
+  position:sticky;
+  top:0;
+  z-index:10;
+  border-bottom:1px solid var(--color-muted);
+}
+header h1 {
+  margin:0;
+  font-size:1.5rem;
+}
+nav a {
+  margin-left:1rem;
+  font-weight:500;
+}
+button.theme-toggle {
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-size:1.2rem;
+}
+section {
+  padding:4rem 2rem;
+  max-width:1200px;
+  margin:auto;
+}
+.hero {
+  text-align:center;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color:#fff;
+  padding:6rem 2rem;
+}
+.hero h2 {
+  font-size:2.5rem;
+  margin-bottom:0.5rem;
+}
+.hero p {
+  font-size:1.2rem;
+}
+.about {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2rem;
+  align-items:center;
+}
+.about img {
+  width:100%;
+  height:auto;
+  border-radius:8px;
+}
+.about div {
+  max-width:600px;
+}
+.gallery {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(250px,1fr));
+  gap:1rem;
+}
+.gallery button {
+  border:none;
+  background:none;
+  padding:0;
+  cursor:pointer;
+}
+.gallery img {
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:4px;
+  transition:transform .2s;
+}
+.gallery img:hover {
+  transform:scale(1.03);
+}
+.modal {
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:2rem;
+}
+.modal[open] {
+  display:flex;
+}
+.modal img {
+  max-width:90vw;
+  max-height:80vh;
+  border-radius:8px;
+}
+.modal button {
+  position:absolute;
+  top:1rem;
+  right:1rem;
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:2rem;
+  cursor:pointer;
+}
+.contact form {
+  display:grid;
+  gap:1rem;
+  max-width:600px;
+  margin:auto;
+}
+.contact label {
+  display:flex;
+  flex-direction:column;
+  font-weight:500;
+}
+.contact input, .contact textarea {
+  padding:0.5rem;
+  border:1px solid var(--color-muted);
+  border-radius:4px;
+  background:var(--color-bg);
+  color:var(--color-fg);
+}
+.contact button {
+  padding:0.75rem 1.5rem;
+  background:var(--color-primary);
+  color:#fff;
+  border:none;
+  border-radius:4px;
+  cursor:pointer;
+  font-size:1rem;
+}
+footer {
+  text-align:center;
+  padding:2rem;
+  font-size:0.9rem;
+  color:var(--color-muted);
+}
+@media (max-width:768px) {
+  .about {
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Jane Doe</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+    <button class="theme-toggle" aria-label="Toggle dark mode">🌓</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Capturing Moments, Telling Stories</h2>
+  <p>Landscape • Portrait • Street • Travel</p>
+</section>
+
+<section id="about" class="about">
+  <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNlZWUiLz48dGV4dCB4PSI1MCIgeT0iMjAwIiBmb250LXNpemU9IjYwIiBmaWxsPSIjY2NjIj5QaG90byA8L3RleHQ+PC9zdmc+" alt="Portrait of Jane Doe" aria-hidden="true">
+  <div>
+    <h2>About Me</h2>
+    <p>Hello! I’m Jane, a passionate photographer based in Seattle. I love exploring the world through my lens, capturing the raw emotions of people and the serene beauty of nature. My work blends storytelling with visual artistry, aiming to evoke feelings and spark curiosity.</p>
+    <p>When I’m not behind the camera, you’ll find me hiking, sipping coffee, or curating my ever-growing collection of vintage lenses.</p>
+  </div>
+</section>
+
+<section id="gallery" class="gallery">
+  <!-- Placeholder images generated with inline SVG -->
+  <button data-index="0" aria-label="Open photo 1">
+    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmMmYyZjIiLz48dGV4dCB4PSIxNTAiIHk9IjEwMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iI2NjYyI+UGhvdG8gMS48L3RleHQ+PC9zdmc+" alt="Photo 1">
+  </button>
+  <button data-index="1" aria-label="Open photo 2">
+    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmZmYwMDAiLz48dGV4dCB4PSIxNTAiIHk9IjEwMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iI2NjYyI+UGhvdG8gMi48L3RleHQ+PC9zdmc+" alt="Photo 2">
+  </button>
+  <button data-index="2" aria-label="Open photo 3">
+    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmZjAwZmYiLz48dGV4dCB4PSIxNTAiIHk9IjEwMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iI2NjYyI+UGhvdG8gMy48L3RleHQ+PC9zdmc+" alt="Photo 3">
+  </button>
+  <button data-index="3" aria-label="Open photo 4">
+    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmZjBmZjAiLz48dGV4dCB4PSIxNTAiIHk9IjEwMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iI2NjYyI+UGhvdG8gNC48L3RleHQ+PC9zdmc+" alt="Photo 4">
+  </button>
+  <button data-index="4" aria-label="Open photo 5">
+    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmZjAwZmYiLz48dGV4dCB4PSIxNTAiIHk9IjEwMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iI2NjYyI+UGhvdG8gNS48L3RleHQ+PC9zdmc+" alt="Photo 5">
+  </button>
+  <button data-index="5" aria-label="Open photo 6">
+    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmMmYyZjIiLz48dGV4dCB4PSIxNTAiIHk9IjEwMCIgZm9udC1zaXplPSIxNCIgZmlsbD0iI2NjYyI+UGhvdG8gNi48L3RleHQ+PC9zdmc+" alt="Photo 6">
+  </button>
+</section>
+
+<div class="modal" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+  <button id="closeLightbox" aria-label="Close preview">✕</button>
+  <img src="" alt="">
+</div>
+
+<section id="contact" class="contact">
+  <h2 style="text-align:center;">Get In Touch</h2>
+  <form id="contactForm" novalidate>
+    <label>
+      Name
+      <input type="text" name="name" required aria-required="true">
+    </label>
+    <label>
+      Email
+      <input type="email" name="email" required aria-required="true">
+    </label>
+    <label>
+      Message
+      <textarea name="message" rows="5" required aria-required="true"></textarea>
+    </label>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  © <span id="year"></span> Jane Doe Photography. All rights reserved.
+</footer>
+
+<script>
+/* Theme toggle with persistence */
+(function(){
+  const root = document.documentElement;
+  const toggleBtn = document.querySelector('.theme-toggle');
+  const stored = localStorage.getItem('theme');
+  if(stored) root.dataset.theme = stored;
+  else if(window.matchMedia('(prefers-color-scheme: dark)').matches) root.dataset.theme='dark';
+  else root.dataset.theme='light';
+  const updateIcon = () => {
+    toggleBtn.textContent = root.dataset.theme === 'dark' ? '☀️' : '🌓';
+  };
+  toggleBtn.addEventListener('click',()=>{
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', root.dataset.theme);
+    updateIcon();
+  });
+  updateIcon();
+})();
+
+/* Lightbox functionality */
+(function(){
+  const modal = document.getElementById('lightbox');
+  const modalImg = modal.querySelector('img');
+  const closeBtn = document.getElementById('closeLightbox');
+  const galleryButtons = document.querySelectorAll('.gallery button');
+  const placeholders = [
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmMmYyZjIiLz48dGV4dCB4PSI1MCIgeT0iMjAwIiBmb250LXNpemU9IjYwIiBmaWxsPSIjY2NjIj5QaG90byAxPC90ZXh0Pjwvc3ZnPg==",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmZmYwMDAiLz48dGV4dCB4PSI1MCIgeT0iMjAwIiBmb250LXNpemU9IjYwIiBmaWxsPSIjY2NjIj5QaG90byAyPC90ZXh0Pjwvc3ZnPg==",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmZjAwZmYiLz48dGV4dCB4PSI1MCIgeT0iMjAwIiBmb250LXNpemU9IjYwIiBmaWxsPSIjY2NjIj5QaG90byAzPC90ZXh0Pjwvc3ZnPg==",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmZjBmZjAiLz48dGV4dCB4PSI1MCIgeT0iMjAwIiBmb250LXNpemU9IjYwIiBmaWxsPSIjY2NjIj5QaG90byA0PC90ZXh0Pjwvc3ZnPg==",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmZjAwZmYiLz48dGV4dCB4PSI1MCIgeT0iMjAwIiBmb250LXNpemU9IjYwIiBmaWxsPSIjY2NjIj5QaG90byA1PC90ZXh0Pjwvc3ZnPg==",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDYwMCA0MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmMmYyZjIiLz48dGV4dCB4PSI1MCIgeT0iMjAwIiBmb250LXNpemU9IjYwIiBmaWxsPSIjY2NjIj5QaG90byA2PC90ZXh0Pjwvc3ZnPg=="
+  ];
+  galleryButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const idx = btn.dataset.index;
+      modalImg.src = placeholders[idx];
+      modalImg.alt = `Photo ${parseInt(idx)+1}`;
+      modal.setAttribute('open','');
+    });
+  });
+  closeBtn.addEventListener('click',()=> modal.removeAttribute('open'));
+  modal.addEventListener('click', (e)=> {
+    if(e.target===modal) modal.removeAttribute('open');
+  });
+  document.addEventListener('keydown', (e)=>{
+    if(e.key==='Escape' && modal.hasAttribute('open')) modal.removeAttribute('open');
+  });
+})();
+
+/* Contact form placeholder handling */
+(function(){
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    alert('Thank you! Your message has been received.');
+    form.reset();
+  });
+})();
+
+/* Footer year */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
